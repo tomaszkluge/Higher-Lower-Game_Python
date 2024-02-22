@@ -18,23 +18,28 @@ def random_account():
 
 
 def game():
+    should_continue = True
     first_account = random_account()
-    next_account = random_account()
-    choose = int(
-        input(f"1. {first_account}\n{sources.art.vs}\n2. {next_account}\n\nChoose: 1 or 2 has more followers: "))
-    if choose == 1 or choose == 2:
-        if choose == 1:
-            if first_account[1] > next_account[1]:
-                print("Great!")
-            else:
-                print("Wrong :(")
-        elif choose == 2:
-            if first_account[1] < next_account[1]:
-                print("Great!")
-            else:
-                print("Wrong :(")
-    else:
-        print("Wrong number")
+    while should_continue:
+        next_account = random_account()
+        choose = int(
+            input(f"1. {first_account}\n{sources.art.vs}\n2. {next_account}\n\nChoose: 1 or 2 has more followers: "))
+        if choose == 1 or choose == 2:
+            if choose == 1:
+                if first_account[1] > next_account[1]:
+                    print("Great!")
+                else:
+                    print("Wrong :(")
+                    should_continue = False
+            elif choose == 2:
+                if first_account[1] < next_account[1]:
+                    first_account = next_account
+                    print("Great!")
+                else:
+                    print("Wrong :(")
+                    should_continue = False
+        else:
+            print("Wrong number")
 
 
 game()
